@@ -24,7 +24,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Appointment_addEntry.cpp">
+    <ClCompile Include="Appointment_add.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Appointment.cpp">
@@ -33,16 +33,16 @@
     <ClCompile Include="Appointment_display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Appointment_deleteEntry.cpp">
+    <ClCompile Include="Appointment_remove.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Appointment_displayEntry.cpp">
+    <ClCompile Include="Appointment_search.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Appointment_searchEntry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Appointment_sortEntry.cpp">
+    <ClCompile Include="Appointment_sort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Appointment_checkConflict.cpp">

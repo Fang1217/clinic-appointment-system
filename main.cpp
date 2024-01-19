@@ -7,7 +7,7 @@ int main()
 	std::cout << "Hello World!" << endl;
 
 	//Load(); //Read file.
-	Appointment as;
+	Appointment as; // Initiate the appointment system.
 	string input;
 	char choice;
 
@@ -15,39 +15,37 @@ int main()
 
 	while (true)
 	{
-		cout << response << endl;
+		system("cls||clear");
+
 		//Main menu section
 		cout << "\n\tWelcome to Clinic Appointment System.\n";
 
-		//if (productCount > 0) {
-		//    //If at least 1 product is added, display the cart.
-		//    cout << "\nCurrent inventory:\n";   
-		//    Display(0, productCount);
-		//
+
 		// show todays appointment feature
 
 
 		cout << "1. Add Appointment\n"
 			 << "2. Search Appointment\n"
-			 << "3. Delete Existing Appointment\n"
+			 << "3. Display Appointment\n"
+			 << "4. Delete Existing Appointment\n\n"
 			//pending add edit 
-			 << "4. Exit\n\n";
+			 << "5. Exit\n\n";
 		cout << "Please select your option (1-6): ";
 		getline(cin, input); //Using getline instead of cin to combat errors regarding spaces.
 		choice = input[0]; // Only receive one letter to prevent error.
 		switch (choice)
 		{
 		case '1': //Insert product
-			as.addEntry(response);
+			as.add();
 			break;
 		case '2': //Search product
-			//as.();
+			as.search();
 			break;
 		case '3': //Edit
-			//Edit();
+			as.display();
 			break;
 		case '4': //Delete
-			//Delete();
+			as.remove();
 			break;
 		case '5': //Checkout
 			//Checkout();

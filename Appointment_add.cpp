@@ -1,9 +1,8 @@
 #include "Appointment.hpp"
 
-void Appointment::addEntry(string& response) {
-	// Ask question to entry
+void Appointment::add() {
 
-	// Verify inputs + activate time slot checker
+	// To add: Verify inputs + activate time slot checker
 
 	std::cout << "Input date: ";
 	string date;
@@ -17,7 +16,6 @@ void Appointment::addEntry(string& response) {
 
 	// checkConflict(date, startTime, endTime);
 	// check time conflict here before continuing
-	// if starttime (>= any starttime at the same date and <= any end time) 
 
 	std::cout << "Input Doctor ID: ";
 	string doctorID;
@@ -39,7 +37,9 @@ void Appointment::addEntry(string& response) {
 	numberOfAppointments++;
 
 	appointments.push_back(*newAppointment);
-	system("cls||clear"); //Clears terminal, where 'cls' - Windows, 'clear' - Mac devices.
 	
-	response = "Appointment added successfully.";
+	cout << "Appointment added successfully.\n" << 
+			"Press any key to continue.";
+	cin.ignore();
+
 }

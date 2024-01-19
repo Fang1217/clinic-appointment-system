@@ -5,20 +5,20 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <ctime>
+#include <vector>
+
+typedef std::string DateTime; //instead of ct,. for now.
 
 using namespace std;
 
-// To do in the future: Safe coding management
+
 class AppointmentEntry
 {
 
 public:
-	// static int numberOfAppointments;
-	//std::tm date;
-	string date;
-	string startTime;
-	string endTime;
+	DateTime date;
+	DateTime startTime;
+	DateTime endTime;
 	string patientID;
 	string patientName;
 	string doctorID;
@@ -29,7 +29,9 @@ public:
 
 	// Constructor. Creates an appointment entry.
 	AppointmentEntry 
-		(string date, string startTime, string endTime, string patientID, string patientName, string doctorID, string doctorName, string description);
+		(DateTime date, DateTime startTime, DateTime endTime, string patientID, string patientName, string doctorID, string doctorName, string description);
+
+	vector<string> getEntry();
 };
 
 #endif

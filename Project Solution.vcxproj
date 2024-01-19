@@ -127,16 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Appointment_addEntry.cpp" />
+    <ClCompile Include="Appointment_add.cpp" />
     <ClCompile Include="AppointmentEntry.cpp" />
     <ClCompile Include="Appointment.cpp" />
-    <ClCompile Include="Appointment_deleteEntry.cpp" />
+    <ClCompile Include="Appointment_remove.cpp" />
     <ClCompile Include="Appointment_display.cpp" />
-    <ClCompile Include="Appointment_displayEntry.cpp" />
+    <ClCompile Include="Appointment_search.cpp" />
     <ClCompile Include="Appointment_checkConflict.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Appointment_searchEntry.cpp" />
-    <ClCompile Include="Appointment_sortEntry.cpp" />
+    <ClCompile Include="Appointment_sort.cpp" />
     <ClCompile Include="Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
