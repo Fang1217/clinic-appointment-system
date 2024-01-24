@@ -30,7 +30,7 @@ void Appointment::load(AppointmentNode*& head) {
 
             // Create an AppointmentEntry object and add it to the linked list
             AppointmentNode* newNode = new AppointmentNode;
-            newNode->appointmentEntry = AppointmentEntry(startTime, endTime, stoi(patientID), patientName, stoi(doctorID), doctorName, description);
+            newNode->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
             newNode->nextNode = NULL;
 
             if (head == NULL) {

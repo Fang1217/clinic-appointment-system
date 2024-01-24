@@ -17,29 +17,29 @@ void Appointment::display() {
 	}
 	catch (invalid_argument) { entries = 10; }
 
-		cout << "Displaying " << min(numberOfAppointments, entries) << " entries: \n";
-		// add table header
+	cout << "Displaying " << min(numberOfAppointments, entries) << " entries: \n";
+	// add table header
 
-		// display specific number of entries.
-		try {
-			AppointmentNode* currentNodePointer = headNodePointer;
-			for (int i = 0; i < min(numberOfAppointments, entries); i++) {
-				AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
-				cout << " " << i + 1 << "\t | "
-					<< appointmentEntry.startTime.displayDate("%Y/%m/%d %H:%M") << " - "
-					<< appointmentEntry.endTime.displayTime("%H:%M") << " | "
-					<< appointmentEntry.patientID << ": "
-					<< appointmentEntry.patientName << "\t | "
-					<< appointmentEntry.doctorID << ": "
-					<< appointmentEntry.doctorName << "\t | "
-					<< appointmentEntry.description << "\t | "
-					<< "\n";
+	// display specific number of entries.
+	try {
+		AppointmentNode* currentNodePointer = headNodePointer;
+		for (int i = 0; i < min(numberOfAppointments, entries); i++) {
+			AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
+			cout << " " << i + 1 << "\t | "
+				<< appointmentEntry.startTime.displayDate("%Y/%m/%d %H:%M") << " - "
+				<< appointmentEntry.endTime.displayTime("%H:%M") << " | "
+				<< appointmentEntry.patientID << ": "
+				<< appointmentEntry.patientName << "\t | "
+				<< appointmentEntry.doctorID << ": "
+				<< appointmentEntry.doctorName << "\t | "
+				<< appointmentEntry.description << "\t | "
+				<< "\n";
 
-				currentNodePointer = currentNodePointer->nextNode;
-			}
+			currentNodePointer = currentNodePointer->nextNode;
 		}
-		catch (exception e) { cout << "Error display"; };
-		//  update: change to select sort by, if needed, or exit.
-		cout << "\nPress Enter to continue.\n\n";
-		cin.ignore();
-};
+	}
+	catch (exception e) { cout << "Error display"; };
+	//  update: change to select sort by, if needed, or exit.
+	cout << "\nPress Enter to continue.\n\n";
+	cin.ignore();
+}

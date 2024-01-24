@@ -4,7 +4,7 @@ void Appointment::save() {
     std::ofstream outputFile(SAVE_FILE_DIRECTORY);
 
     if (!outputFile.is_open() || numberOfAppointments == 0) {
-        std::cerr << "Unable to save." << std::endl;
+        std::cerr << "Unable to save appointments. File not open or no appointments to save." << std::endl;
         return;
     }
 

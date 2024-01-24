@@ -15,7 +15,7 @@ class AppointmentEntry
 public:
 	DateTime startTime;
 	DateTime endTime;
-	int patientID;
+	string patientID;
 	string patientName;
 	int doctorID;
 	string doctorName;
@@ -29,7 +29,7 @@ public:
 
 	// Constructor. Creates an appointment entry.
 	AppointmentEntry 
-		(DateTime startTime, DateTime endTime, int patientID, string patientName, int doctorID, string doctorName, string description);
+		(DateTime startTime, DateTime endTime, string patientID, string patientName, int doctorID, string doctorName, string description);
 };
 
 #endif

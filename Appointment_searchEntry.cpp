@@ -17,7 +17,7 @@ Queue Appointment::searchEntry(const string searchTerm, const int searchType) {
 				searchQueue.enqueue(i);
 			break;
 		case 1: // patient ID/name
-			if (to_string(appointmentEntry.patientID) == searchTerm || appointmentEntry.patientName == searchTerm)
+			if (appointmentEntry.patientID == searchTerm || appointmentEntry.patientName == searchTerm)
 				searchQueue.enqueue(i);
 			break;
 		case 2: // doctor ID/name

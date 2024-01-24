@@ -9,14 +9,14 @@ void Appointment::remove() {
 		return;
 	}
 
-	std::cout << "Input search string: ";
-	string searchTerm;
-	getline(cin, searchTerm);
-	std::cout << "Search type [0 - Date, 1 - Patient, 2 - Doctor]: ";
+	cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
 	string input;
 	getline(cin, input);
-
 	int searchType = stoi(input);
+
+	cout << ((searchType == 0) ? "Input start date (YYYY/MM/DD): " : "Input search term: ");
+	string searchTerm;
+	getline(cin, searchTerm);
 
 	Queue resultQueue = searchEntry(searchTerm, searchType);
 	int numberOfResults = resultQueue.count;
@@ -40,8 +40,8 @@ void Appointment::remove() {
 			currentNodePointer = currentNodePointer->nextNode;
 		}
 		AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
-		if (numberOfResults > 1)
-			cout << i << "\t";
+		if (numberOfResults > 1) {
+			cout << i+1 << "\t";
 			cout << appointmentEntry.startTime.displayTime("%Y/%m/%d %H:%M") << " - "
 			<< appointmentEntry.endTime.displayTime("%H:%M") << " | "
 			<< appointmentEntry.patientID << ":"
@@ -50,13 +50,17 @@ void Appointment::remove() {
 			<< appointmentEntry.doctorName << " | "
 			<< appointmentEntry.description << " | "
 			<< "\n";
+		}
 	}
 
 	if (numberOfResults == 1) {
 		cout << "Remove this entry? (Y/N)";
-		cin >> input;
+		getline(cin, input);
 		if (toupper(input[0]) == 'Y') {
 			AppointmentNode* temp = currentNodePointer;
+			if (currentNodePointer == headNodePointer) {
+				headNodePointer = currentNodePointer->nextNode;
+			}
 			currentNodePointer = currentNodePointer->nextNode;
 			delete temp;
 			temp = NULL;
@@ -64,14 +68,15 @@ void Appointment::remove() {
 	}
 	else {
 	removeID:
-		cout << "Select which entry to remove.";
-		cin >> input;
-		if (!regex_match(input, regex("[0-9]+"))) {
+		cout << "Select which entry to remove.\n";
+		getline(cin, input);
+		if (!regex_match(input, regex("^[0-9]+$"))) {
 			cout << "Error: invalid input, please try again.\n";
 			goto removeID;
 		}
-		int indexToRemove = stoi(input);
-		if (indexToRemove < 0 && indexToRemove >= numberOfResults) {
+		
+		int indexToRemove = stoi(input) - 1;
+		if (indexToRemove < 0 || indexToRemove >= numberOfResults) {
 			cout << "Error: invalid index to remove, please try again.\n";
 			goto removeID;
 		}
@@ -84,11 +89,15 @@ void Appointment::remove() {
 
 		// Remove the node
 		AppointmentNode* temp = currentNodePointer;
+		if (currentNodePointer == headNodePointer) {
+			headNodePointer = currentNodePointer->nextNode;
+		}
 		currentNodePointer = currentNodePointer->nextNode;
 		delete temp;
 		temp = NULL;
 	}
 	
+	numberOfAppointments--;
 	save();
 
 	cout << "Entry removed successfully.";

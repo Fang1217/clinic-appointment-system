@@ -34,7 +34,7 @@ void Appointment::add() {
 		cout << "Input Doctor ID: ";
 		string doctorID;
 		getline(cin, doctorID);
-		if (!regex_match(doctorID, regex("[0-9]+"))) {
+		if (!regex_match(doctorID, regex("^[0-9]+$"))) {
 			cout << "Error: invalid input, please try again.\n";
 			goto doctorID;
 		}
@@ -49,10 +49,10 @@ void Appointment::add() {
 		}
 
 	patientID:
-		cout << "Input Patient ID: ";
+		cout << "Input Patient NRIC (without symbols): ";
 		string patientID;
 		getline(cin, patientID);
-		if (!regex_match(doctorID, regex("[0-9]+"))) {
+		if (!regex_match(patientID, regex("^[0-9]{12}$"))) {
 			cout << "Error: invalid input, please try again.\n";
 			goto patientID;
 		}
@@ -76,7 +76,7 @@ void Appointment::add() {
 		}
 
 	AppointmentNode* newAppointmentNode = new AppointmentNode;
-	newAppointmentNode->appointmentEntry = AppointmentEntry(startTime, endTime, stoi(patientID), patientName, stoi(doctorID), doctorName, description);
+	newAppointmentNode->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
 	newAppointmentNode->nextNode = NULL;
 
 	if (headNodePointer == NULL) {

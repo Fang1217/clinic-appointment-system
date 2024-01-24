@@ -7,15 +7,14 @@ void Appointment::edit() {
 		cin.ignore();
 		return;
 	}
-
-	std::cout << "Input search string: ";
-	string searchTerm;
-	getline(cin, searchTerm);
-	std::cout << "Search type [0 - Date, 1 - Patient, 2 - Doctor]: ";
+	cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
 	string input;
 	getline(cin, input);
-
 	int searchType = stoi(input);
+
+	cout << ((searchType == 0) ? "Input start date (YYYY/MM/DD): " : "Input search term: ");
+	string searchTerm;
+	getline(cin, searchTerm);
 
 	Queue resultQueue = searchEntry(searchTerm, searchType);
 	int numberOfResults = resultQueue.count;
@@ -115,7 +114,7 @@ endTime:
 		goto startTime;
 
 doctorID:
-	std::cout << "Input Doctor ID: " << appointmentEntryToEdit.doctorID << "]: " << endl;
+	std::cout << "Input Doctor ID [" << appointmentEntryToEdit.doctorID << "]: " << endl;
 	string doctorID;
 	getline(cin, doctorID);
 	if (!regex_match(doctorID, regex("[0-9]+"))) {
@@ -124,7 +123,7 @@ doctorID:
 	}
 
 doctorName:
-	std::cout << "Input Doctor Name: " << appointmentEntryToEdit.doctorName << "]: " << endl;
+	std::cout << "Input Doctor Name [" << appointmentEntryToEdit.doctorName << "]: " << endl;
 	string doctorName;
 	getline(cin, doctorName);
 	if (doctorName == "") {
@@ -133,7 +132,7 @@ doctorName:
 	}
 
 patientID:
-	std::cout << "Input Patient ID: " << appointmentEntryToEdit.patientID << "]: " << endl;
+	std::cout << "Input Patient ID [" << appointmentEntryToEdit.patientID << "]: " << endl;
 	string patientID;
 	getline(cin, patientID);
 	if (!regex_match(doctorID, regex("[0-9]+"))) {
@@ -142,7 +141,7 @@ patientID:
 	}
 
 patientName:
-	std::cout << "Input new patient Name: " << appointmentEntryToEdit.patientName << "]: " << endl;
+	std::cout << "Input new patient Name [" << appointmentEntryToEdit.patientName << "]: " << endl;
 	string patientName;
 	getline(cin, patientName);
 	if (patientName == "") {
@@ -151,7 +150,7 @@ patientName:
 	}
 
 description:
-	std::cout << "Input new description: [" << appointmentEntryToEdit.description << "]: " << endl;
+	std::cout << "Input new description [" << appointmentEntryToEdit.description << "]: " << endl;
 	string description;
 	getline(cin, description);
 	if (description == "") {
@@ -159,7 +158,7 @@ description:
 		goto description;
 	}
 
-	currentNodePointer->appointmentEntry = AppointmentEntry(startTime, endTime, stoi(patientID), patientName, stoi(doctorID), doctorName, description);
+	currentNodePointer->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
 
 	save();
 

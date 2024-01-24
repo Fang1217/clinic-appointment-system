@@ -2,15 +2,14 @@
 
 void Appointment::search() {
 
-	std::cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
+	cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
 	string input;
 	getline(cin, input);
 	int searchType = stoi(input);
 
-	std::cout << "Input search term: ";
+	cout << ((searchType == 0) ? "Input start date (YYYY/MM/DD): " : "Input search term: ");
 	string searchTerm;
 	getline(cin, searchTerm);
-
 
 	// Search 
 	Queue searchQueue = searchEntry(searchTerm, searchType);

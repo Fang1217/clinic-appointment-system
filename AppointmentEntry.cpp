@@ -18,7 +18,7 @@ AppointmentEntry::AppointmentEntry(const AppointmentEntry& ae) {
 
 // Constructor. Creates an appointment entry.
 AppointmentEntry::AppointmentEntry
-	(DateTime startTime, DateTime endTime, int patientID, std::string patientName, int doctorID, std::string doctorName, std::string description) {
+	(DateTime startTime, DateTime endTime, string patientID, string patientName, int doctorID, std::string doctorName, string description) {
 	this->startTime = DateTime(startTime);
 	this->endTime = DateTime(endTime);
 	this->patientID = patientID;
