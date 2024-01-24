@@ -3,13 +3,13 @@
 void Appointment::search() {
 
 	std::cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
-	string searchTerm;
-	getline(cin, searchTerm);
-	int searchType = stoi(searchTerm);
-
-	std::cout << "Input search term: ";
 	string input;
 	getline(cin, input);
+	int searchType = stoi(input);
+
+	std::cout << "Input search term: ";
+	string searchTerm;
+	getline(cin, searchTerm);
 
 
 	// Search 
