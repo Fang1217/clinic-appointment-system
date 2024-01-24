@@ -130,18 +130,25 @@
     <ClCompile Include="Appointment_add.cpp" />
     <ClCompile Include="AppointmentEntry.cpp" />
     <ClCompile Include="Appointment.cpp" />
+    <ClCompile Include="Appointment_displayCalendar.cpp" />
+    <ClCompile Include="Appointment_edit.cpp" />
     <ClCompile Include="Appointment_remove.cpp" />
     <ClCompile Include="Appointment_display.cpp" />
+    <ClCompile Include="Appointment_save.cpp" />
     <ClCompile Include="Appointment_search.cpp" />
     <ClCompile Include="Appointment_checkConflict.cpp" />
+    <ClCompile Include="DateTime.cpp" />
+    <ClCompile Include="Appointment_load.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Appointment_searchEntry.cpp" />
-    <ClCompile Include="Appointment_sort.cpp" />
-    <ClCompile Include="Validator.cpp" />
+    <ClCompile Include="Appointment_sortEntry.cpp" />
+    <ClCompile Include="Queue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppointmentEntry.hpp" />
     <ClInclude Include="Appointment.hpp" />
+    <ClInclude Include="DateTime.hpp" />
+    <ClInclude Include="Queue.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

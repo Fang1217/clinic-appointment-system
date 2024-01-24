@@ -8,26 +8,38 @@ void Appointment::display() {
 		return;
 	}
 
-	std::cout << "Input how many entries to display (Default: 10): ";
+	cout << "Input how many entries to display (Default: 10): ";
 	string input;
+	int entries;
 	getline(cin, input);
-	int head = stoi(input);
-
-	// display 'head' number of entries.
-	for (int i = 0; i < min(numberOfAppointments, head); i++) {
-		cout << appointments[i].date << " | "
-			 << appointments[i].startTime << " | "
-			 << appointments[i].endTime << " | "
-			 << appointments[i].patientID << " | "
-			 << appointments[i].patientName << " | "
-			 << appointments[i].doctorID << " | "
-			 << appointments[i].doctorName << " | "
-			 << appointments[i].description << " | "
-			 << "\n";
+	try {
+		entries = stoi(input);
 	}
-	cout << "\nPress Enter to continue.\n\n";
-	cin.ignore();
-};
+	catch (invalid_argument) { entries = 10; }
 
-// Display the calendar view of specific month, where entries of the currently active appointments will be displayed.
-//void display(int month, int year) 
+		cout << "Displaying " << min(numberOfAppointments, entries) << " entries: \n";
+		// add table header
+
+		// display specific number of entries.
+		try {
+			AppointmentNode* currentNodePointer = headNodePointer;
+			for (int i = 0; i < min(numberOfAppointments, entries); i++) {
+				AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
+				cout << " " << i + 1 << "\t | "
+					<< appointmentEntry.startTime.displayDate("%Y/%m/%d %H:%M") << " - "
+					<< appointmentEntry.endTime.displayTime("%H:%M") << " | "
+					<< appointmentEntry.patientID << ": "
+					<< appointmentEntry.patientName << "\t | "
+					<< appointmentEntry.doctorID << ": "
+					<< appointmentEntry.doctorName << "\t | "
+					<< appointmentEntry.description << "\t | "
+					<< "\n";
+
+				currentNodePointer = currentNodePointer->nextNode;
+			}
+		}
+		catch (exception e) { cout << "Error display"; };
+		//  update: change to select sort by, if needed, or exit.
+		cout << "\nPress Enter to continue.\n\n";
+		cin.ignore();
+};

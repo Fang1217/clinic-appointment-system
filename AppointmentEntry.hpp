@@ -5,33 +5,31 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
-
-typedef std::string DateTime; //instead of ct,. for now.
+#include "DateTime.hpp"
 
 using namespace std;
 
 
 class AppointmentEntry
 {
-
 public:
-	DateTime date;
 	DateTime startTime;
 	DateTime endTime;
-	string patientID;
+	int patientID;
 	string patientName;
-	string doctorID;
+	int doctorID;
 	string doctorName;
 	string description;
 
+	// Default constructor.
 	AppointmentEntry();
+
+	// Copy constructor. 
+	AppointmentEntry(const AppointmentEntry& ae);
 
 	// Constructor. Creates an appointment entry.
 	AppointmentEntry 
-		(DateTime date, DateTime startTime, DateTime endTime, string patientID, string patientName, string doctorID, string doctorName, string description);
-
-	vector<string> getEntry();
+		(DateTime startTime, DateTime endTime, int patientID, string patientName, int doctorID, string doctorName, string description);
 };
 
 #endif

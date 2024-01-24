@@ -2,18 +2,29 @@
 
 using namespace std;
 
-// To do in the future: Safe coding management
-AppointmentEntry::AppointmentEntry() {};
+AppointmentEntry::AppointmentEntry() {
+};
+
+AppointmentEntry::AppointmentEntry(const AppointmentEntry& ae) {
+	this->startTime = ae.startTime;
+	this->endTime = ae.endTime;
+	this->patientID = ae.patientID;
+	this->patientName = ae.patientName;
+	this->doctorID = ae.doctorID;
+	this->doctorName = ae.doctorName;
+	this->description = ae.description;
+};
+
 
 // Constructor. Creates an appointment entry.
 AppointmentEntry::AppointmentEntry
-	(string date, string startTime, string endTime, string patientID, std::string patientName, string doctorID, std::string doctorName, std::string description) {
-	this->date = date;
-	this->startTime = startTime;
-	this->endTime = endTime;
+	(DateTime startTime, DateTime endTime, int patientID, std::string patientName, int doctorID, std::string doctorName, std::string description) {
+	this->startTime = DateTime(startTime);
+	this->endTime = DateTime(endTime);
 	this->patientID = patientID;
 	this->patientName = patientName;
 	this->doctorID = doctorID;
 	this->doctorName = doctorName;
 	this->description = description;
 };
+

@@ -1,26 +1,34 @@
 #include "Appointment.hpp"
+#include "Queue.hpp"
 
-vector<int> Appointment::searchEntry(const string searchTerm, const int searchType) {
 
-	vector<int> positionArray;
+Queue Appointment::searchEntry(const string searchTerm, const int searchType) {
 
-	for (int i = 0; i < appointments.size(); i++) {
+	Queue searchQueue = Queue();
+
+	AppointmentNode* currentNodePointer = headNodePointer;
+
+	for (int i = 0; i < numberOfAppointments; i++) {
+		AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
+
 		switch (searchType) {
 		case 0: // date
-			if (appointments[i].date == searchTerm)
-				positionArray.push_back(i);
+			if (appointmentEntry.startTime.displayDate() == searchTerm)
+				searchQueue.enqueue(i);
 			break;
 		case 1: // patient ID/name
-			if (appointments[i].patientID == searchTerm || appointments[i].patientName == searchTerm)
-				positionArray.push_back(i);
+			if (to_string(appointmentEntry.patientID) == searchTerm || appointmentEntry.patientName == searchTerm)
+				searchQueue.enqueue(i);
 			break;
 		case 2: // doctor ID/name
-			if (appointments[i].doctorID == searchTerm || appointments[i].doctorName == searchTerm)
-				positionArray.push_back(i);
+			if (to_string(appointmentEntry.doctorID) == searchTerm || appointmentEntry.doctorName == searchTerm)
+				searchQueue.enqueue(i);
 			break;
 		}
+
+		currentNodePointer = currentNodePointer->nextNode;
 	}
 
-	return positionArray;
+	return searchQueue;
 
 };

@@ -2,21 +2,20 @@
 
 void Appointment::search() {
 
-	// ask which type to search using the search keyword
-	// ask what input to search
-	std::cout << "Input search string: ";
+	std::cout << "Search type [0 - Start Date, 1 - Patient, 2 - Doctor]: ";
 	string searchTerm;
 	getline(cin, searchTerm);
-	std::cout << "Search type [0 - Date, 1 - Patient, 2 - Doctor]: ";
+	int searchType = stoi(searchTerm);
+
+	std::cout << "Input search term: ";
 	string input;
 	getline(cin, input);
-	
-	int searchType = stoi(input);
 
-	// call saerch(string searchTerm, int searchType), based on output: V
-	vector<int> resultVector = searchEntry(searchTerm, searchType);
 
-	if (resultVector.size() == 0) {
+	// Search 
+	Queue searchQueue = searchEntry(searchTerm, searchType);
+
+	if (searchQueue.isEmpty()) {
 		cout << "no results found\n";
 		cin.ignore();
 		return;
@@ -24,17 +23,24 @@ void Appointment::search() {
 	else {
 		// respond found (>=1)
 		cout << "<Table header>\n";
-		for (int i = 0; i < resultVector.size(); i++) {
-			cout 
-				<< appointments[i].startTime << " | "
-				<< appointments[i].endTime << " | "
-				<< appointments[i].patientID << " | "
-				<< appointments[i].patientName << " | "
-				<< appointments[i].doctorID << " | "
-				<< appointments[i].doctorName << " | "
-				<< appointments[i].description << " | "
+		while (!searchQueue.isEmpty()) {
+			// Find specific entry to display
+			int index = searchQueue.getFrontAndPop();
+			AppointmentNode* currentNodePointer = headNodePointer;
+			for (int j = 0; j < index; j++) {
+				currentNodePointer = currentNodePointer->nextNode;
+			}
+			AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
+			cout << index << " | "
+				<< appointmentEntry.startTime.displayTime() << " - "
+				<< appointmentEntry.endTime.displayTime() << " | "
+				<< appointmentEntry.patientID << " | "
+				<< appointmentEntry.patientName << " | "
+				<< appointmentEntry.doctorID << " | "
+				<< appointmentEntry.doctorName << " | "
+				<< appointmentEntry.description << " | "
 				<< "\n";
 		}
-		
+		cin.ignore();
 	}
 };

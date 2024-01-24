@@ -6,25 +6,20 @@
 #include <fstream>
 #include <string>
 #include <ctime>
-#include <vector> // Temporary sub for vector rather than linked based implementations
+#include <regex>
+#include <vector> // Temporary sub for vector rather than linked
 #include "AppointmentEntry.hpp"
+#include "Queue.hpp"
 
 using namespace std;
 
 class Appointment
 {
 public:
+	const string SAVE_FILE_DIRECTORY = "saveData.txt";
 
-	//AppointmentEntry appointment;
-	//AppointmentEntry* next;
-	// pointer based 
-	std::vector<AppointmentEntry> appointments;
-
-	// Constructor. Creates an appointment system object that contains no data.
+	// Constructor. Loads the appointment system object from the save file.
 	Appointment();
-
-	// Constructor. Creates an appointment system object with data that is loaded from infile file.
-	//Appointment(std::ifstream& infile);
 
 	// Destructor. Deletes the appointment system object.
 	~Appointment();
@@ -34,36 +29,46 @@ public:
 	void display();
 
 	// Display the calendar view of specific month, where entries of the currently active appointments will be displayed.
-	//void displayCalendar(int month, int year);
+	void displayCalendar(DateTime& selectedMonth);
 
 	// Add new appointment data into the system.
 	void add();
 
-	// Delete data from the system.
+	// Delete the specific entry with specific search term.
 	void remove();
 
 	// Display data in the system, based on search string and type.
 	void search();
 
+	// Edit data in the system, based on search string and type.
+	void edit();
 
 private:
+
+	// Linked-list implementation to store appointment entries data.
+	struct AppointmentNode {
+		AppointmentEntry appointmentEntry;
+		AppointmentNode* nextNode = NULL;
+	};
+
 	int numberOfAppointments = 0;
-	// Returns an array of IDs of the result from searching using searchTerm, of type searchType, which then be processed by the public functions.
-	vector<int> searchEntry(std::string searchTerm, int searchType);
+	AppointmentNode* headNodePointer = NULL;
 
-	// Delete the specific entry with specific search term.
-	void removeEntry(std::string searchTerm, int searchType);
+	// Returns a queue containing all result index from searching using searchTerm, of type searchType, 
+	// which then be processed by the public functions.
+	Queue searchEntry(std::string searchTerm, int searchType);
 
+	// Perform insertion sort and return a sorted list from the pointer, which then be processed by the public functions.
+	AppointmentNode* sortEntry(AppointmentNode* head, int sortType = 0);
 
-	// Returns an array of IDs of the result from after sorting by sortType, which then be processed by the public functions.
-	int* sortEntry(const int data[], int sortType);
-
-	// Returns true when there is no conflict when adding a new schedule.
-	bool checkConflict();
-
+	// Check all appointment entries for time conflicts. Returns true when there is no conflict when adding a new schedule.
+	bool checkConflict(DateTime startTime, DateTime endTime);
+	
+	// Save on every changes made in the system.
+	void load(AppointmentNode*& head);
 
 	// Save on every changes made in the system.
-	///void save();
+	void save();
 };
 
 #endif
