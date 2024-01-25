@@ -7,8 +7,18 @@ void Appointment::display() {
 		cin.ignore();
 		return;
 	}
+	/*
+	do {
+		cout << "Input how many entries to display (Default: 10): ";
+		getline(cin, doctorID);
+		success = regex_match(doctorID, regex("^[0-9]+$"));
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
+	*/
 
-	cout << "Input how many entries to display (Default: 10): ";
+	
 	string input;
 	int entries;
 	getline(cin, input);

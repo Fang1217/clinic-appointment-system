@@ -78,6 +78,7 @@ int DateTime::getYear() const {
 	return getLocalTime()->tm_year + 1900;  // Years since 1900
 }
 
+
 int DateTime::getMonth() const {
 	return getLocalTime()->tm_mon + 1;  // Months are zero-based
 }
@@ -100,4 +101,8 @@ int DateTime::getSecond() const {
 
 int DateTime::getDayOfWeek() const {
 	return getLocalTime()->tm_wday;
+}
+
+void setDay() {
+
 }

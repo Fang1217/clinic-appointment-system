@@ -17,23 +17,33 @@ int main()
 
 	while (true)
 	{
-		// show this month calendar feature
-		as.displayCalendar(currentMonth);
-		//Main menu section
-		cout << "\n\n\n\n\n\n"; // Add extra lines for vertical spacing
-		cout << " ******************************************\n";
-		cout << "*        Welcome to Clinic Appointment     *\n";
-		cout << "*                  System                  *\n";
-		cout << " ******************************************\n\n";
 
+
+		//Main menu section
+		cout << "\n\n"; // Add extra lines for vertical spacing
+		cout << "********************************************************\n";
+		cout << "*            Welcome to Clinic Appointment             *\n";
+		cout << "*                        System                        *\n";
+		cout << "********************************************************\n\n";
+
+	
+		// show this month calendar feature
+		int month = currentMonth.getMonth();
+		int year = currentMonth.getYear();
+		currentMonth.setTime(year, month); // set the date to 1st for calendar.
+		as.displayCalendar(currentMonth);
 
 		cout << "1. Add Appointment\n"
 			<< "2. Search Appointment\n"
 			<< "3. Display Appointment\n"
 			<< "4. Delete Existing Appointment\n"
-			<< "5. Edit Existing Appointment\n"
-			<< "6. Exit\n\n";
-		cout << "Please select your option (1-6): ";
+			<< "5. Edit Existing Appointment\n\n"
+			
+			<< "8. Calendar: Show previous month\n"
+			<< "9. Calendar: Show next month\n\n"
+
+			<< "0. Exit\n\n";
+		cout << "Please select your option: ";
 		getline(cin, input);
 		try {
 			choice = stoi(input); // Convert the entire input to an integer
@@ -50,16 +60,24 @@ int main()
 		case 2: //Search product
 			as.search();
 			break;
-		case 3: //Edit
+		case 3: //Display
 			as.display();
 			break;
 		case 4: //Delete
 			as.remove();
 			break;
-		case 5: //Checkout
+		case 5: //Edit
 			as.edit();
 			break;
-		case 6:
+		case 8: //Previous Month
+			currentMonth.setTime(month == 1 ? year - 1 : year, month == 1 ? 12 : month - 1);
+			system("cls||clear");
+			break;
+		case 9: //Next Month
+			currentMonth.setTime(month == 12 ? year + 1 : year, month == 12 ? 1 : month + 1);
+			system("cls||clear");
+			break;
+		case 0:
 			system("cls||clear"); //Clears terminal, where 'cls' - Windows, 'clear' - Mac devices.
 			cout << "Goodbye !";
 			return 0;

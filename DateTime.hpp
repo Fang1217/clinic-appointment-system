@@ -23,26 +23,35 @@ public:
     DateTime(const DateTime& d);
 
     // Using Regular Expressions to extract information from string.
-    // Returns true if string is a valid date/time.
+    // Returns false if input string is an invalid.
     bool setTime(string input);
 
     // Specific argument to set time.
     // Returns true all fields are valid.
-    bool setTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0);
+    bool setTime(int year, int month, int day = 1, int hour = 0, int minute = 0, int second = 0);
 
-    // Display time with %Y, %m, %d, %H, %M, %S 
-    // Example: "%Y-%m-%d %H:%M:%S"
+    // Display current date with %Y, %m, %d
+    // Default format: YYYY/MM/DD
     string displayDate(string format = "%Y/%m/%d") const;
+    // Display current date time with %Y, %m, %d, %H, %M, %S 
+    // Default format: YYYY/MM/DD HH:MM
     string displayTime(string format = "%Y/%m/%d %H:%M") const;
 
     // Return time_t storedTime, which can be used for comparison.
     time_t getTime() const;
+    // Get the year of the DateTime object. Returns int from 1900 to 2038.
     int getYear() const;
+    // Get the month of the DateTime object. Returns int from 1 to 12.
     int getMonth() const;
+    // Get the day of the DateTime object. Returns int from 1900 to 2038.
     int getDay() const;
+    // Get the hour of the DateTime object. Returns int from 0 to 23 (24 hour format).
     int getHour() const;
+    // Get the minute of the DateTime object. Returns int from 0 to 59.
     int getMinute() const;
+    // Get the second of the DateTime object. Returns int from 0 to 59.
     int getSecond() const;
+    // Get the day of the week of the DateTime object. Returns int from 0 (Sunday) to 6 (Saturday).
     int getDayOfWeek() const;
 };
 

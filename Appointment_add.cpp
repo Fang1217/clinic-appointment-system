@@ -2,79 +2,85 @@
 
 void Appointment::add() {
 	bool success;
-	// To add: Verify inputs + activate time slot checker
+	string input;
 
-	startTime:
+	DateTime startTime = DateTime();
+	do {
 		cout << "Input start time (YYYY/MM/DD HH:MM): ";
-		string startTimeInput;
-		getline(cin, startTimeInput);
-		DateTime startTime = DateTime();
-		success = startTime.setTime(startTimeInput);
-		if (!success) {
-			cout << "Error: invalid format, please try again.\n";
-			goto startTime;
-		}
-
-	endTime:
+		getline(cin, input);
+		success = startTime.setTime(input);
+		if (success)
+			continue;
+		cout << "Error: Inputted date is an invalid format, please try again.\n";
+	} while (!success);
+	
+	DateTime endTime = DateTime();
+	do {
 		cout << "Input end time (YYYY/MM/DD HH:MM): ";
-		string endTimeInput;
-		getline(cin, endTimeInput);
-		DateTime endTime = DateTime();
-		success = endTime.setTime(endTimeInput);
-		if (!success) {
-			cout << "Error: invalid format, please try again.\n";
-			goto endTime;
-		}
+		getline(cin, input);
+		success = startTime.setTime(input);
+		if (success)
+			continue;
+		cout << "Error: Inputted date is an invalid format, please try again.\n";
+	} while (!success);
 
 	// Check time conflict before continuing
 	if (!checkConflict(startTime, endTime))
-		goto startTime;
+		add();
 
-	doctorID: 
+
+	string doctorID;
+	string doctorName;
+	string patientID;
+	string patientName;
+	string description;
+
+	do {
 		cout << "Input Doctor ID: ";
-		string doctorID;
-		getline(cin, doctorID);
-		if (!regex_match(doctorID, regex("^[0-9]+$"))) {
-			cout << "Error: invalid input, please try again.\n";
-			goto doctorID;
-		}
+		getline(std::cin, doctorID);
+		success = regex_match(doctorID, regex("^[0-9]+$"));
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
 
-	doctorName: 
+	do {
 		cout << "Input Doctor Name: ";
-		string doctorName;
-		getline(cin, doctorName);
-		if (doctorName.empty()) {
-			cout << "Error: invalid input, please try again.\n";
-			goto doctorName;
-		}
+		getline(std::cin, doctorName);
+		success = !(doctorName.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
 
-	patientID:
+	do {
 		cout << "Input Patient NRIC (without symbols): ";
-		string patientID;
-		getline(cin, patientID);
-		if (!regex_match(patientID, regex("^[0-9]{12}$"))) {
-			cout << "Error: invalid input, please try again.\n";
-			goto patientID;
-		}
+		getline(std::cin, patientID);
+		success = regex_match(patientID, regex("^[0-9]{12}$"));
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
 
-	patientName:
+	do {
 		cout << "Input Patient Name: ";
-		string patientName;
-		getline(cin, patientName);
-		if (patientName == "") {
-			cout << "Error: invalid input, please try again.\n";
-			goto patientName;
-		}
-	
-	description:
-		std::cout << "Input Description: ";
-		string description;
-		getline(cin, description);
-		if (description == "") {
-			cout << "Error: invalid input, please try again.\n";
-			goto description;
-		}
+		getline(std::cin, patientName);
+		success = !(patientName.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
 
+	do {
+		cout << "Input Description: ";
+		getline(std::cin, description);
+		success = !(description.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
+
+	// Append new node into the linked-list.
 	AppointmentNode* newAppointmentNode = new AppointmentNode;
 	newAppointmentNode->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
 	newAppointmentNode->nextNode = NULL;
@@ -83,6 +89,7 @@ void Appointment::add() {
 		headNodePointer = newAppointmentNode;
 	}
 	else {
+		// Traverse to the last node
 		AppointmentNode* currentNodePointer = headNodePointer;
 		while (currentNodePointer->nextNode != NULL)
 		{
@@ -95,8 +102,8 @@ void Appointment::add() {
 	sortEntry(headNodePointer);
 	save();
 
-	cout << "Appointment added successfully.\n" << 
-			"Press any key to continue.";
+	cout << "Appointment added successfully.\n"
+		<< "Press any key to continue.";
 	cin.ignore();
 
 }

@@ -31,7 +31,7 @@ public:
 	// Display the calendar view of specific month, where entries of the currently active appointments will be displayed.
 	void displayCalendar(DateTime& selectedMonth);
 
-	// Add new appointment data into the system.
+	// Add new appointment entry data into the system.
 	void add();
 
 	// Delete the specific entry with specific search term.
@@ -64,11 +64,12 @@ private:
 	// Check all appointment entries for time conflicts. Returns true when there is no conflict when adding a new schedule.
 	bool checkConflict(DateTime startTime, DateTime endTime);
 	
-	// Save on every changes made in the system.
+	// Load from the external save file.
 	void load(AppointmentNode*& head);
 
 	// Save on every changes made in the system.
 	void save();
+	
 };
 
 #endif

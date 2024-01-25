@@ -9,20 +9,20 @@ void Appointment::load(AppointmentNode*& head) {
 
     string line;
     try {
-        while (std::getline(inputFile, line)) {
+        while (getline(inputFile, line)) {
             istringstream iss(line);
             string startTimeString, endTimeString, patientID, patientName, doctorID, doctorName, description;
             
             DateTime startTime, endTime;
 
             // Ensure all required fields are successfully read
-            if (!(std::getline(iss, startTimeString, ',') &&
-                std::getline(iss, endTimeString, ',') &&
-                std::getline(iss, patientID, ',') &&
-                std::getline(iss, patientName, ',') &&
-                std::getline(iss, doctorID, ',') &&
-                std::getline(iss, doctorName, ',') &&
-                std::getline(iss, description, ','))) {
+            if (!(getline(iss, startTimeString, ',') &&
+                getline(iss, endTimeString, ',') &&
+                getline(iss, patientID, ',') &&
+                getline(iss, patientName, ',') &&
+                getline(iss, doctorID, ',') &&
+                getline(iss, doctorName, ',') &&
+                getline(iss, description, ','))) {
                 throw runtime_error("Error parsing line: " + line);
             }
             if (!(startTime.setTime(startTimeString) && endTime.setTime(endTimeString)))
@@ -50,7 +50,7 @@ void Appointment::load(AppointmentNode*& head) {
         }
     }
     catch (const exception& e) {
-        std::cerr << "Error reading from the file: " << e.what() << std::endl;
+        cout << "Error reading from the file: " << e.what() << std::endl;
     }
 
     inputFile.close();

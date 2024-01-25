@@ -37,7 +37,7 @@ void Appointment::displayCalendar(DateTime& selectedMonth)
     DateTime today;
     bool todayIsThisMonth = (today.getYear() == year) && (today.getMonth() == month);
     DateTime nextMonth;
-    nextMonth.setTime(month == 12 ? year + 1 : year, month + 1, 1);
+    nextMonth.setTime(month == 12 ? year + 1 : year, ((month + 1) % 12) + 1);
 
     // For each appointment, count the appointments for each day that are in the same month.
     while (current != NULL && current->appointmentEntry.startTime.getTime() < nextMonth.getTime())
@@ -50,7 +50,7 @@ void Appointment::displayCalendar(DateTime& selectedMonth)
     }
 
     // Display month and year
-    cout << monthName[month - 1] << " " << year << endl;
+    cout << "Showing events in " << monthName[month - 1] << " " << year << ": " << endl;
     cout << "--------------------------------------------------------" << endl;
 
     for (string i : dayName)

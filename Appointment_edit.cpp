@@ -2,7 +2,7 @@
 
 void Appointment::edit() {
 	if (numberOfAppointments <= 0) {
-		cout << "cannot edit entry if no appointments.\n"
+		cout << "Unable to edit entry if there are no appointment entries.\n"
 			<< "Press enter to continue.";
 		cin.ignore();
 		return;
@@ -79,84 +79,90 @@ void Appointment::edit() {
 	}
 
 	AppointmentEntry appointmentEntryToEdit = currentNodePointer->appointmentEntry;
-
 	bool success;
-	// To add: Verify inputs + activate time slot checker
+	bool timeConflict;
 
-startTime:
-	std::cout << "Input start time (YYYY/MM/DD HH:MM) [" << appointmentEntryToEdit.startTime.displayTime() << "]: " << endl;
-	string startTimeInput;
-	getline(cin, startTimeInput);
 	DateTime startTime = DateTime();
-
-	// Default input: remain no changes, else set the new time.
-	success = startTimeInput.empty() ? startTime.setTime(appointmentEntryToEdit.startTime.displayTime()) : startTime.setTime(startTimeInput);
-	if (!success) {
-		cout << "Error: invalid format, please try again.\n";
-		goto startTime;
-	}
-
-endTime:
-	std::cout << "Input end time (YYYY/MM/DD HH:MM): " << appointmentEntryToEdit.endTime.displayTime() << "]: " << endl;
-	string endTimeInput;
-	getline(cin, endTimeInput);
 	DateTime endTime = DateTime();
+	string startTimeInput;
+	string endTimeInput;
 
-	// Default input: remain no changes, else set the new time.
-	success = endTimeInput.empty() ? endTime.setTime(appointmentEntryToEdit.endTime.displayTime()) : endTime.setTime(endTimeInput);
-	if (!success) {
-		cout << "Error: invalid format, please try again.\n";
-		goto endTime;
-	}
+	do {
+		do {
+			cout << "Input start time (YYYY/MM/DD HH:MM) [" << appointmentEntryToEdit.startTime.displayTime() << "]: " << endl;
+			getline(cin, startTimeInput);
+			// Default input: remain no changes, else set the new time.
+			success = startTimeInput.empty() ? startTime.setTime(appointmentEntryToEdit.startTime.displayTime()) : startTime.setTime(startTimeInput);
+			if (success)
+				continue;
+			cout << "Error: Inputted date is an invalid format, please try again.\n";
+		} while (!success);
 
-	// Check time conflict before continuing
-	if (!checkConflict(startTime, endTime))
-		goto startTime;
+		do {
+			cout << "Input end time (YYYY/MM/DD HH:MM): " << appointmentEntryToEdit.endTime.displayTime() << "]: " << endl;
+			getline(cin, endTimeInput);
+			// Default input: remain no changes, else set the new time.
+			success = endTimeInput.empty() ? endTime.setTime(appointmentEntryToEdit.endTime.displayTime()) : endTime.setTime(endTimeInput);
+			if (success)
+				continue;
+			cout << "Error: Inputted date is an invalid format, please try again.\n";
+		} while (!success);
 
-doctorID:
-	std::cout << "Input Doctor ID [" << appointmentEntryToEdit.doctorID << "]: " << endl;
+		// Check time conflict before continuing
+		timeConflict = checkConflict(startTime, endTime);
+
+	} while (timeConflict);
+
 	string doctorID;
-	getline(cin, doctorID);
-	if (!regex_match(doctorID, regex("[0-9]+"))) {
-		cout << "Error: invalid input, please try again.\n";
-		goto doctorID;
-	}
-
-doctorName:
-	std::cout << "Input Doctor Name [" << appointmentEntryToEdit.doctorName << "]: " << endl;
 	string doctorName;
-	getline(cin, doctorName);
-	if (doctorName == "") {
-		cout << "Error: invalid input, please try again.\n";
-		goto doctorName;
-	}
-
-patientID:
-	std::cout << "Input Patient ID [" << appointmentEntryToEdit.patientID << "]: " << endl;
 	string patientID;
-	getline(cin, patientID);
-	if (!regex_match(doctorID, regex("[0-9]+"))) {
-		cout << "Error: invalid input, please try again.\n";
-		goto patientID;
-	}
-
-patientName:
-	std::cout << "Input new patient Name [" << appointmentEntryToEdit.patientName << "]: " << endl;
 	string patientName;
-	getline(cin, patientName);
-	if (patientName == "") {
-		cout << "Error: invalid input, please try again.\n";
-		goto patientName;
-	}
-
-description:
-	std::cout << "Input new description [" << appointmentEntryToEdit.description << "]: " << endl;
 	string description;
-	getline(cin, description);
-	if (description == "") {
+
+	do {
+		cout << "Input new Doctor ID [" << appointmentEntryToEdit.doctorID << "]: " << endl;
+		getline(cin, doctorID);
+		success = regex_match(doctorID, regex("^[0-9]+$"));
+		if (success)
+			continue;
 		cout << "Error: invalid input, please try again.\n";
-		goto description;
-	}
+	} while (!success);
+
+	do {
+		cout << "Input new Doctor Name [" << appointmentEntryToEdit.doctorName << "]: " << endl;
+		getline(cin, doctorName);
+		success = !(doctorName.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
+
+	do {
+		cout << "Input new Patient NRIC (without symbols) [" << appointmentEntryToEdit.patientID << "]: " << endl;
+		getline(cin, patientID);
+		success = regex_match(patientID, regex("^[0-9]{12}$"));
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
+
+	do {
+		cout << "Input new Patient Name [" << appointmentEntryToEdit.patientName << "]: " << endl;
+		getline(cin, patientName);
+		success = !(patientName.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
+
+	do {
+		cout << "Input new Description [" << appointmentEntryToEdit.description << "]: " << endl;
+		getline(cin, description);
+		success = !(description.empty());
+		if (success)
+			continue;
+		cout << "Error: invalid input, please try again.\n";
+	} while (!success);
 
 	currentNodePointer->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
 
