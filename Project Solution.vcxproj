@@ -139,8 +139,8 @@
     <ClCompile Include="Appointment_checkConflict.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Appointment_load.cpp" />
+    <ClCompile Include="AppointmentNode.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Appointment_searchEntry.cpp" />
     <ClCompile Include="Appointment_sortEntry.cpp" />
     <ClCompile Include="Queue.cpp" />
   </ItemGroup>

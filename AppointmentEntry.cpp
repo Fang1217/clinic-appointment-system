@@ -3,6 +3,13 @@
 using namespace std;
 
 AppointmentEntry::AppointmentEntry() {
+	this->startTime = DateTime();
+	this->endTime = DateTime();
+	this->patientID = "";
+	this->patientName = "";
+	this->doctorID = 0;
+	this->doctorName = "";
+	this->description = "";
 };
 
 AppointmentEntry::AppointmentEntry(const AppointmentEntry& ae) {

@@ -15,7 +15,7 @@ DateTime::DateTime(const DateTime& d) {
 }
 
 bool DateTime::setTime(string input) {
-	regex pattern(R"(^ *(\d{2,4})\/(\d{1,2})\/(\d{1,2}) (\d{1,2}):(\d{2})(?::(\d{2}))? *$)"); // in YYYY/MM/DD HH:MM:SS format.
+	regex pattern(R"(^ *(\d{2,4})\/(\d{1,2})\/(\d{1,2})(?: (\d{1,2}):(\d{2})(?::(\d{2}))?)? *$)"); // in YYYY/MM/DD HH:MM:SS format.
 	smatch matches;
 
 	bool match = regex_match(input, matches, pattern);
@@ -27,8 +27,8 @@ bool DateTime::setTime(string input) {
 	int month = stoi(matches[2]);
 	int day = stoi(matches[3]);
 
-	int hour = stoi(matches[4]);
-	int minute = stoi(matches[5]);
+	int hour = matches[4].matched ? stoi(matches[4]) : 0;
+	int minute = matches[5].matched ? stoi(matches[5]) : 0;
 	int second = matches[6].matched ? stoi(matches[6]) : 0;
 
 	return setTime(year, month, day, hour, minute, second);

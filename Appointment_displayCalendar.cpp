@@ -97,5 +97,5 @@ void Appointment::displayCalendar(DateTime& selectedMonth)
         }
         endl(cout);
     }
-    cout << "\n[n]: Number of Appointments in that day.\n*: Today\n";
+    cout << "\n[n]: Number of Appointments in that day.\t*: Today\n";
 }

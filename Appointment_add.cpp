@@ -18,7 +18,7 @@ void Appointment::add() {
 	do {
 		cout << "Input end time (YYYY/MM/DD HH:MM): ";
 		getline(cin, input);
-		success = startTime.setTime(input);
+		success = endTime.setTime(input);
 		if (success)
 			continue;
 		cout << "Error: Inputted date is an invalid format, please try again.\n";
@@ -27,7 +27,6 @@ void Appointment::add() {
 	// Check time conflict before continuing
 	if (!checkConflict(startTime, endTime))
 		add();
-
 
 	string doctorID;
 	string doctorName;
@@ -41,7 +40,7 @@ void Appointment::add() {
 		success = regex_match(doctorID, regex("^[0-9]+$"));
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -50,7 +49,7 @@ void Appointment::add() {
 		success = !(doctorName.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -59,7 +58,7 @@ void Appointment::add() {
 		success = regex_match(patientID, regex("^[0-9]{12}$"));
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -68,7 +67,7 @@ void Appointment::add() {
 		success = !(patientName.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -77,27 +76,11 @@ void Appointment::add() {
 		success = !(description.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: invalid input, please try again.\n\n";
 	} while (!success);
 
-	// Append new node into the linked-list.
-	AppointmentNode* newAppointmentNode = new AppointmentNode;
-	newAppointmentNode->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
-	newAppointmentNode->nextNode = NULL;
-
-	if (headNodePointer == NULL) {
-		headNodePointer = newAppointmentNode;
-	}
-	else {
-		// Traverse to the last node
-		AppointmentNode* currentNodePointer = headNodePointer;
-		while (currentNodePointer->nextNode != NULL)
-		{
-			currentNodePointer = currentNodePointer->nextNode;
-		}
-		currentNodePointer->nextNode = newAppointmentNode;
-	}
-	numberOfAppointments++;
+	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
+	addAppointmentMode(newAppointment);
 
 	sortEntry(headNodePointer);
 	save();

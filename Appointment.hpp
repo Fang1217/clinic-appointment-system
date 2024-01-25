@@ -7,9 +7,10 @@
 #include <string>
 #include <ctime>
 #include <regex>
-#include <vector> // Temporary sub for vector rather than linked
+#include <vector> 
 #include "AppointmentEntry.hpp"
 #include "Queue.hpp"
+
 
 using namespace std;
 
@@ -50,13 +51,18 @@ private:
 		AppointmentEntry appointmentEntry;
 		AppointmentNode* nextNode = NULL;
 	};
-
 	int numberOfAppointments = 0;
 	AppointmentNode* headNodePointer = NULL;
 
-	// Returns a queue containing all result index from searching using searchTerm, of type searchType, 
-	// which then be processed by the public functions.
-	Queue searchEntry(std::string searchTerm, int searchType);
+	// Get the AppointmentNode with specified index.
+	AppointmentNode* getAppointmentNode(int index);
+	
+	// Add new AppointmentNode with specified content (AppointmentEntry).
+	void addAppointmentMode(AppointmentEntry appointmentEntry);
+	
+	// Remove AppointmentNode with specified node index.
+	void removeAppointmentNode(int index);
+	
 
 	// Perform insertion sort and return a sorted list from the pointer, which then be processed by the public functions.
 	AppointmentNode* sortEntry(AppointmentNode* head, int sortType = 0);
@@ -66,10 +72,11 @@ private:
 	
 	// Load from the external save file.
 	void load(AppointmentNode*& head);
-
 	// Save on every changes made in the system.
 	void save();
-	
+
+	// Display data in the system, based on search string and type.
+	void search(vector<int>& resultIndexArray);
 };
 
 #endif
