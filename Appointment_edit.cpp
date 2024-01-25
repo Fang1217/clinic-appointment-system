@@ -9,7 +9,7 @@ void Appointment::edit() {
 	bool timeConflict;
 	bool success;
 
-	int numberOfResults = sizeof(resultIndexArray);
+	int numberOfResults = resultIndexArray.size();
 	int indexToEdit;
 
 	switch (numberOfResults) {

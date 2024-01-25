@@ -102,7 +102,3 @@ int DateTime::getSecond() const {
 int DateTime::getDayOfWeek() const {
 	return getLocalTime()->tm_wday;
 }
-
-void setDay() {
-
-}

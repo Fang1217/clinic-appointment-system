@@ -13,8 +13,8 @@ AppointmentEntry::AppointmentEntry() {
 };
 
 AppointmentEntry::AppointmentEntry(const AppointmentEntry& ae) {
-	this->startTime = ae.startTime;
-	this->endTime = ae.endTime;
+	this->startTime = DateTime(ae.startTime);
+	this->endTime = DateTime(ae.endTime);
 	this->patientID = ae.patientID;
 	this->patientName = ae.patientName;
 	this->doctorID = ae.doctorID;

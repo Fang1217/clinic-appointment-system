@@ -13,13 +13,17 @@ bool compare(AppointmentEntry a, AppointmentEntry b, SortType sortType) {
     case SortType::StartTime:
         return a.startTime.getTime() < b.startTime.getTime();
     case SortType::PatientID:
-        return a.patientID < b.patientID;
+        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime() 
+            : a.patientID < b.patientID;
     case SortType::PatientName:
-        return a.patientName < b.patientName;
+        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
+            : a.patientName < b.patientName;
     case SortType::DoctorID:
-        return a.doctorID < b.doctorID;
+        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
+            : a.doctorID < b.doctorID;
     case SortType::DoctorName:
-        return a.doctorName < b.doctorName;
+        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
+            : a.doctorName < b.doctorName;
     default:
         // Handle invalid sortType
         throw invalid_argument("Invalid sortType");

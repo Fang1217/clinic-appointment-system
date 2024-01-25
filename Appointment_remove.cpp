@@ -9,7 +9,7 @@ void Appointment::remove() {
 	bool validInt;
 	bool validIndex;
 
-	int numberOfResults = sizeof(resultIndexArray);
+	int numberOfResults = resultIndexArray.size();
 
 	switch (numberOfResults)
 	{
