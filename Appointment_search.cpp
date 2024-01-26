@@ -93,7 +93,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	// else, found >= 1
 
 	//// Display the table, the length of each column is based on the longest content.
-		cout << "Found " << numberOfResults << " entries:\n\n";
+	cout << "Found " << numberOfResults << " " << (numberOfResults > 1 ? "entries" : "entry") << ": \n\n";
 
 		// Find the maximum width of each column
 		size_t maxColumnWidths[] = { 3, 14, 10, 10, 12 }; // Initial column widths"
@@ -130,7 +130,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 		for (int i = 0; i < numberOfResults; i++) {
 		AppointmentNode* an = getAppointmentNode(resultIndexArray[i]);
 		AppointmentEntry ae = an->appointmentEntry;
-		cout << setw(maxColumnWidths[0]) << right << (resultIndexArray[i] + 1) << " | "
+		cout << setw(maxColumnWidths[0]) << right << (i + 1) << " | "
 				<< setw(maxColumnWidths[1]) << left << ae.startTime.displayTime("%Y/%m/%d %H:%M") + " - " + ae.endTime.displayTime("%H:%M") << " | "
 				<< setw(maxColumnWidths[2]) << ae.patientID + ": " + ae.patientName << " | "
 				<< setw(maxColumnWidths[3]) << to_string(ae.doctorID) + ": " + ae.doctorName << " | "

@@ -83,14 +83,14 @@ void Appointment::display() {
 				if (success) {
 					sortType = (input.empty() ? 9 : stoi(input));
 					continue;
-					cout << "Error: invalid input, please try again.\n\n";
+					cout << "Error: Invalid input, please try again.\n\n";
 				}
 			} while (!success);
 			validInt = ((sortType >= 0 && sortType <= 4 ) || sortType == 9);
 			
 			if (validInt)
 				continue;
-			cout << "Error: input out of range, please try again.\n\n";
+			cout << "Error: Input out of range, please try again.\n\n";
 		} while (!validInt);
 
 		if (sortType == 9) break; 

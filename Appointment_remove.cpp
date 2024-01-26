@@ -33,15 +33,17 @@ void Appointment::remove() {
 				validInt = regex_match(input, regex("^[0-9]+$"));
 				if (validInt)
 					continue;
+				cout << "Error: invalid input, please try again.\n";
 			} while (!validInt);
 
 			int position = stoi(input) - 1;
-			validIndex = (position >= 0 && position < numberOfResults);
+			validIndex = (position >= 0 && position < numberOfResults); // 0 to number of results
 			if (validIndex) {
 				int indexToRemove = resultIndexArray[position];
 				removeAppointmentNode(indexToRemove);
 				continue;
 			}
+			cout << "Error: invalid index to remove, please try again.\n";
 		} while (!validIndex);
 		break;
 	}

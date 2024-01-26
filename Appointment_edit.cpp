@@ -38,13 +38,13 @@ void Appointment::edit() {
 				cout << "Error: invalid input, please try again.\n";
 			} while (!validInt);
 
-			int position = stoi(input) - 1;
-			validPosition = position < 0 && position >= numberOfResults;
+			int position = stoi(input) - 1; 
+			validPosition = position >= 0 && position < numberOfResults;
 			if (validPosition) {
 				indexToEdit = resultIndexArray[position];
 				continue;
 			}
-			cout << "Error: invalid index to remove, please try again.\n";
+			cout << "Error: Invalid index to remove, please try again.\n";
 		} while (!validPosition);
 	};
 		
