@@ -78,8 +78,7 @@ int main()
 			system("cls||clear");
 			break;
 		case 0:
-			system("cls||clear"); //Clears terminal, where 'cls' - Windows, 'clear' - Mac devices.
-			cout << "Goodbye !";
+			cout << "\nGoodbye !";
 			return 0;
 			break;
 		default:

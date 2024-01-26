@@ -3,6 +3,8 @@
 Appointment::AppointmentNode* Appointment::getAppointmentNode(int index) {
 	AppointmentNode* currentNodePointer = headNodePointer;
 	for (int j = 0; j < index; j++) {
+		if (currentNodePointer->nextNode == NULL)
+			return NULL;
 		currentNodePointer = currentNodePointer->nextNode;
 	}
 	return currentNodePointer;
@@ -31,6 +33,10 @@ void Appointment::addAppointmentMode(AppointmentEntry appointmentEntry) {
 
 void Appointment::removeAppointmentNode(int index) {
 	AppointmentNode* appointmentNode = getAppointmentNode(index);
+	if (appointmentNode == NULL) {
+		cout << "Error on remove node";
+		return;
+	}
 	AppointmentNode* temp = appointmentNode;
 	if (appointmentNode == headNodePointer) {
 		headNodePointer = appointmentNode->nextNode;

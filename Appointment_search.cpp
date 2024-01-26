@@ -4,10 +4,6 @@ using namespace std;
 void Appointment::search() {
 	vector<int> resultIndexArray;
 	search(resultIndexArray);
-
-	// todo: add sort by feature
-	cout << "\nPress enter to continue.";
-	cin.ignore();
 }
 
 void Appointment::search(vector<int>& resultIndexArray) {
@@ -48,12 +44,12 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	do {
 		cout << ((searchType == 0) ? "Input start date (YYYY/MM/DD) [" + today + "]: " : "Input search term: ");
 		getline(cin, input);
-		success = ((searchType == 0) ? input.empty() || DateTime().setTime(input) : input.empty());
+		success = ((searchType == 0) ? (input.empty() || DateTime().setTime(input, true)) : !input.empty());
 		if (success) {
 			searchTerm = ((searchType == 0 && input.empty()) ? today : input);
 			continue;
 		}
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: invalid search string, please try again.\n\n";
 	} while (!success);
 
 	// Search 
@@ -84,6 +80,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	//Display each matching entries.
 	if (resultQueue.isEmpty()) {
 		cout << "No results found";
+		cin.ignore();
 		return;
 	}
 	else {
@@ -140,4 +137,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 				<< setw(maxColumnWidths[4]) << ae.description << " | "
 				<< endl;
 				}
+
+		cout << "\nPress enter to continue.";
+		cin.ignore();
 };

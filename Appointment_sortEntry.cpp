@@ -8,22 +8,22 @@ enum class SortType {
     DoctorName
 };
 
-bool compare(AppointmentEntry a, AppointmentEntry b, SortType sortType) {
+bool compare(AppointmentEntry& a, AppointmentEntry& b, SortType sortType) {
     switch (sortType) {
     case SortType::StartTime:
         return a.startTime.getTime() < b.startTime.getTime();
     case SortType::PatientID:
-        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime() 
-            : a.patientID < b.patientID;
+        return (a.patientID == b.patientID) ? (a.startTime.getTime() < b.startTime.getTime())
+            : (a.patientID < b.patientID);
     case SortType::PatientName:
-        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
-            : a.patientName < b.patientName;
+        return (a.patientName == b.patientName) ? (a.startTime.getTime() < b.startTime.getTime())
+            : (a.patientName < b.patientName);
     case SortType::DoctorID:
-        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
-            : a.doctorID < b.doctorID;
+        return (a.doctorID == b.doctorID) ? (a.startTime.getTime() < b.startTime.getTime())
+            : (a.doctorID < b.doctorID);
     case SortType::DoctorName:
-        return a.patientID == b.patientID ? a.startTime.getTime() < b.startTime.getTime()
-            : a.doctorName < b.doctorName;
+        return (a.doctorName == b.doctorName) ? (a.startTime.getTime() < b.startTime.getTime())
+            : (a.doctorName < b.doctorName);
     default:
         // Handle invalid sortType
         throw invalid_argument("Invalid sortType");
@@ -39,6 +39,7 @@ Appointment::AppointmentNode* Appointment::sortEntry(AppointmentNode* head, int 
 
     while (head != nullptr) {
         AppointmentNode* current = head; // Take the current node from the unsorted list
+        current->appointmentEntry = head->appointmentEntry;
         head = head->nextNode;    // Move to the next unsorted node
 
         if (sorted == nullptr || compare(current->appointmentEntry, sorted->appointmentEntry, (SortType) sortType)) {

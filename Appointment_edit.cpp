@@ -14,16 +14,13 @@ void Appointment::edit() {
 
 	switch (numberOfResults) {
 	case 0:
-		cout << "No results found.\nPress Enter to continue.";
-		cin.ignore();
 		return;
 
 	case 1:
 		cout << "Edit this entry? [y/N]";
 		getline(cin, input);
 		if (toupper(input[0]) == 'Y') {
-			int index = resultIndexArray[0];
-			removeAppointmentNode(index);
+			indexToEdit = resultIndexArray[0];
 		}
 		else return;
 		break;

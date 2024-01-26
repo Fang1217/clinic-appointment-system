@@ -24,10 +24,11 @@ public:
 
     // Using Regular Expressions to extract information from string.
     // Returns false if input string is an invalid.
-    bool setTime(string input);
+    bool setTime(string input, bool dateOnly = false);
 
     // Specific argument to set time.
     // Returns true all fields are valid.
+
     bool setTime(int year, int month, int day = 1, int hour = 0, int minute = 0, int second = 0);
 
     // Display current date with %Y, %m, %d

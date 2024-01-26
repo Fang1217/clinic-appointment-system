@@ -14,8 +14,6 @@ void Appointment::remove() {
 	switch (numberOfResults)
 	{
 	case 0: 
-		cout << "No results found.\nPress Enter to continue.";
-		cin.ignore();
 		return;
 
 	case 1:

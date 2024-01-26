@@ -14,8 +14,12 @@ DateTime::DateTime(const DateTime& d) {
 	storedTime = d.getTime();
 }
 
-bool DateTime::setTime(string input) {
-	regex pattern(R"(^ *(\d{2,4})\/(\d{1,2})\/(\d{1,2})(?: (\d{1,2}):(\d{2})(?::(\d{2}))?)? *$)"); // in YYYY/MM/DD HH:MM:SS format.
+bool DateTime::setTime(string input, bool DateOnly) {
+	regex pattern;
+	if (DateOnly)
+		pattern = (R"(^ *(\d{2,4})\/(\d{1,2})\/(\d{1,2}) *$)"); // in YYYY/MM/DD format
+	else
+		pattern = (R"(^ *(\d{2,4})\/(\d{1,2})\/(\d{1,2})(?: (\d{1,2}):(\d{2})(?::(\d{2}))?) *$)"); // in YYYY/MM/DD HH:MM:SS format.
 	smatch matches;
 
 	bool match = regex_match(input, matches, pattern);

@@ -29,24 +29,8 @@ void Appointment::load(AppointmentNode*& head) {
                 throw runtime_error("Invalid time(s).");
 
             // Create an AppointmentEntry object and add it to the linked list
-            AppointmentNode* newNode = new AppointmentNode;
-            newNode->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
-            newNode->nextNode = NULL;
-
-            if (head == NULL) {
-                // If the list is empty, set the newEntry as the head
-                head = newNode;
-            }
-            else {
-                AppointmentNode* currentNode = head;
-                // Otherwise, traverse to the end of the list and append the newEntry
-                while (currentNode->nextNode != NULL) {
-                    currentNode = currentNode->nextNode;
-                }
-                currentNode->nextNode = newNode;
-            }
-
-            numberOfAppointments++;
+            AppointmentEntry newAppointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
+            addAppointmentMode(newAppointmentEntry);
         }
     }
     catch (const exception& e) {
