@@ -40,7 +40,7 @@ void Appointment::add() {
 		success = regex_match(doctorID, regex("^[0-9]+$"));
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -49,7 +49,7 @@ void Appointment::add() {
 		success = !(doctorName.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -58,7 +58,7 @@ void Appointment::add() {
 		success = regex_match(patientID, regex("^[0-9]{12}$"));
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -67,7 +67,7 @@ void Appointment::add() {
 		success = !(patientName.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
 	do {
@@ -76,7 +76,7 @@ void Appointment::add() {
 		success = !(description.empty());
 		if (success)
 			continue;
-		cout << "Error: invalid input, please try again.\n\n";
+		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
 	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);

@@ -17,8 +17,6 @@ int main()
 
 	while (true)
 	{
-
-
 		//Main menu section
 		cout << "\n\n"; // Add extra lines for vertical spacing
 		cout << "********************************************************\n";
@@ -33,9 +31,9 @@ int main()
 		currentMonth.setTime(year, month); // set the date to 1st for calendar.
 		as.displayCalendar(currentMonth);
 
-		cout << "1. Add Appointment\n"
-			<< "2. Search Appointment\n"
-			<< "3. Display Appointment\n"
+		cout << "1. Display Appointment(s)\n"
+			<< "2. Search Appointment(s)\n"
+			<< "3. Add Appointment\n"
 			<< "4. Delete Existing Appointment\n"
 			<< "5. Edit Existing Appointment\n\n"
 			
@@ -55,13 +53,13 @@ int main()
 		switch (choice)
 		{
 		case 1: //Insert product
-			as.add();
+			as.display();
 			break;
 		case 2: //Search product
 			as.search();
 			break;
 		case 3: //Display
-			as.display();
+			as.add();
 			break;
 		case 4: //Delete
 			as.remove();
@@ -83,7 +81,7 @@ int main()
 			break;
 		default:
 			response = "Invalid option!";
-			cout << "Invalid Option! Please enter a number between 1 and 6." << endl;
+			cout << "Invalid Option! Please Enter a number between 1 and 6." << endl;
 			system("pause");
 			system("cls||clear");
 			break;

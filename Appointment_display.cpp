@@ -17,20 +17,20 @@ void Appointment::display() {
 	}
 
 	do {
-		cout << "Input how many entries to display [10]: ";
+		cout << "Input how many entries to display [" << DEFAULT_ENTRIES << "]: ";
 		getline(cin, input);
 		success = input.empty() || regex_match(input, regex("^[0-9]+$"));
 		if (success) {
 			entries = min(input.empty() ? DEFAULT_ENTRIES : stoi(input), numberOfAppointments);
 			continue;
 		}
-		cout << "Error: invalid input, please try again.\n";
+		cout << "Error: Invalid input, please try again.\n";
 	} while (!success);
 	
 	while (true) 
 	{
 		//// Display the table, the length of each column is based on the longest content.
-		cout << "Displaying " << entries << " entries: \n\n";
+		cout << "Displaying " << entries << " " << (entries > 1 ? "entries" : "entries") << ": \n\n";
 
 		// Find the maximum width of each column
 		size_t maxColumnWidths[] = { 3, 14, 10, 10, 12 }; // Initial column widths
@@ -73,6 +73,7 @@ void Appointment::display() {
 
 			currentNodePointer = currentNodePointer->nextNode;
 		}
+
 		int sortType = 0;
 		do {
 			do {

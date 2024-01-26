@@ -4,6 +4,9 @@ using namespace std;
 void Appointment::search() {
 	vector<int> resultIndexArray;
 	search(resultIndexArray);
+
+	cout << "\nPress Enter to continue.";
+	cin.ignore();
 }
 
 void Appointment::search(vector<int>& resultIndexArray) {
@@ -11,7 +14,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	// Check if there are no appointment entries.
 	if (numberOfAppointments <= 0) {
 		cout << "There are no entries in the appointment system.\n"
-			<< "Press enter to continue.";
+			<< "Press Enter to continue.";
 		cin.ignore();
 		return;
 	}
@@ -31,12 +34,12 @@ void Appointment::search(vector<int>& resultIndexArray) {
 				searchType = (input.empty() ? 0 : stoi(input));
 				continue;
 			}
-			cout << "Error: invalid input, please try again.\n\n";
+			cout << "Error: Invalid input, please try again.\n\n";
 		} while (!success);
 		validInt = (searchType >= 0 && searchType <= 2);
 		if (validInt)
 			continue;
-		cout << "Error: input out of range, please try again.\n\n";
+		cout << "Error: Input out of range, please try again.\n\n";
 	} while (!validInt);
 
 	DateTime date = DateTime();
@@ -49,7 +52,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 			searchTerm = ((searchType == 0 && input.empty()) ? today : input);
 			continue;
 		}
-		cout << "Error: invalid search string, please try again.\n\n";
+		cout << "Error: Invalid search string, please try again.\n\n";
 	} while (!success);
 
 	// Search 
@@ -80,13 +83,12 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	//Display each matching entries.
 	if (resultQueue.isEmpty()) {
 		cout << "No results found";
-		cin.ignore();
 		return;
 	}
 	else {
-	while (!resultQueue.isEmpty()) {
-			resultIndexArray.push_back(resultQueue.getFrontAndPop());
-	}
+		while (!resultQueue.isEmpty()) {
+				resultIndexArray.push_back(resultQueue.getFrontAndPop());
+		}
 	}
 
 	int numberOfResults = resultIndexArray.size();
@@ -138,6 +140,4 @@ void Appointment::search(vector<int>& resultIndexArray) {
 				<< endl;
 				}
 
-		cout << "\nPress enter to continue.";
-		cin.ignore();
 };

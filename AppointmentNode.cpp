@@ -1,10 +1,10 @@
 #include "Appointment.hpp"
 
 Appointment::AppointmentNode* Appointment::getAppointmentNode(int index) {
+	if (index >= numberOfAppointments)
+		return NULL;
 	AppointmentNode* currentNodePointer = headNodePointer;
 	for (int j = 0; j < index; j++) {
-		if (currentNodePointer->nextNode == NULL)
-			return NULL;
 		currentNodePointer = currentNodePointer->nextNode;
 	}
 	return currentNodePointer;
@@ -32,21 +32,23 @@ void Appointment::addAppointmentMode(AppointmentEntry appointmentEntry) {
 }
 
 void Appointment::removeAppointmentNode(int index) {
-	AppointmentNode* appointmentNode = getAppointmentNode(index);
-	if (appointmentNode == NULL) {
+	AppointmentNode* previousNode = getAppointmentNode(index - 1);
+	AppointmentNode* currentNode = getAppointmentNode(index);
+
+	if (currentNode == NULL) {
 		cout << "Error on remove node";
 		return;
 	}
-	AppointmentNode* temp = appointmentNode;
-	if (appointmentNode == headNodePointer) {
-		headNodePointer = appointmentNode->nextNode;
+	if (currentNode == headNodePointer) {
+		headNodePointer = currentNode->nextNode;
 	}
 	else {
-		// Update currentNodePointer only if not the head
-		appointmentNode = headNodePointer;
+		AppointmentNode* temp = currentNode;
+		previousNode->nextNode = currentNode->nextNode;
+		temp->nextNode = NULL;
+		delete temp;
+		temp = NULL;
 	}
-	delete temp;
-	temp = NULL;
 	
 	numberOfAppointments--;
 }

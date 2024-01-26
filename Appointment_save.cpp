@@ -11,6 +11,7 @@ void Appointment::save() {
 	Appointment::AppointmentNode* currentNodePointer = headNodePointer;
     while (currentNodePointer != nullptr) {
 		AppointmentEntry appointmentEntry = currentNodePointer->appointmentEntry;
+
 		outputFile << appointmentEntry.startTime.displayTime() << ","
 			<< appointmentEntry.endTime.displayTime() << ","
 			<< appointmentEntry.patientID << ","
