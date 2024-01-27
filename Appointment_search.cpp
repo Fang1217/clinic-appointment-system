@@ -5,7 +5,7 @@ void Appointment::search() {
 	vector<int> resultIndexArray;
 	search(resultIndexArray);
 
-	cout << "\nPress Enter to continue.";
+	cout << "Press Enter to continue.";
 	cin.ignore();
 }
 
@@ -82,7 +82,7 @@ void Appointment::search(vector<int>& resultIndexArray) {
 	
 	//Display each matching entries.
 	if (resultQueue.isEmpty()) {
-		cout << "No results found";
+		cout << "No results found\n";
 		return;
 	}
 	else {

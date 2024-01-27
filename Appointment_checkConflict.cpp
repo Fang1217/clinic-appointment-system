@@ -19,7 +19,7 @@ bool Appointment::checkConflict(DateTime newStartTime, DateTime newEndTime) {
 			cout << "Patient ID & Name: "
 				<< appointmentEntry.patientID << " - "
 				<< appointmentEntry.patientName << "\n";
-			cout << "Doctor ID & Name: "
+			cout << "Doctor ID & Name: "s
 				<< appointmentEntry.doctorID << " - "
 				<< appointmentEntry.doctorName << "\n";
 			cout << "Description: "

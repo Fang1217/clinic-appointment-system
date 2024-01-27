@@ -4,7 +4,8 @@ using namespace std;
 void Appointment::remove() {
 	vector<int> resultIndexArray;
 	search(resultIndexArray);
-
+	if (numberOfAppointments == 0)
+		return;
 	string input;
 	bool validInt;
 	bool validIndex;

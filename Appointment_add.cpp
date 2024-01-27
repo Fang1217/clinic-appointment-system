@@ -28,7 +28,7 @@ void Appointment::add() {
 	if (!checkConflict(startTime, endTime))
 		add();
 
-	string doctorID;
+	int doctorID;
 	string doctorName;
 	string patientID;
 	string patientName;
@@ -36,10 +36,12 @@ void Appointment::add() {
 
 	do {
 		cout << "Input Doctor ID: ";
-		getline(std::cin, doctorID);
-		success = regex_match(doctorID, regex("^[0-9]+$"));
-		if (success)
+		getline(std::cin, input);
+		success = regex_match(input, regex("^[0-9]+$"));
+		if (success) {
+			doctorID = stoi(input);
 			continue;
+		}
 		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
@@ -79,7 +81,7 @@ void Appointment::add() {
 		cout << "Error: Invalid input, please try again.\n\n";
 	} while (!success);
 
-	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, stoi(doctorID), doctorName, description);
+	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, doctorID, doctorName, description);
 	addAppointmentMode(newAppointment);
 
 	sortEntry(headNodePointer);
