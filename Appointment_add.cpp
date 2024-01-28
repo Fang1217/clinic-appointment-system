@@ -11,17 +11,17 @@ void Appointment::add() {
 		success = startTime.setTime(input);
 		if (success)
 			continue;
-		cout << "Error: Inputted date is an invalid format, please try again.\n";
+		cout << "Error: Inputted date is invalid, please try again.\n";
 	} while (!success);
 	
 	DateTime endTime = DateTime();
 	do {
 		cout << "Input end time (YYYY/MM/DD HH:MM): ";
 		getline(cin, input);
-		success = endTime.setTime(input);
+		success = endTime.setTime(input) && endTime.getTime() > startTime.getTime();
 		if (success)
 			continue;
-		cout << "Error: Inputted date is an invalid format, please try again.\n";
+		cout << "Error: Inputted date is invalid, please try again.\n";
 	} while (!success);
 
 	// Check time conflict before continuing

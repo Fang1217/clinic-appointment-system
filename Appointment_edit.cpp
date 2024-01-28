@@ -69,20 +69,24 @@ void Appointment::edit() {
 			cout << "Input start time (YYYY/MM/DD HH:MM) [" << originalStartTime.displayTime() << "]: ";
 			getline(cin, startTimeInput);
 			// Default input: remain no changes, else set the new time.
-			success = startTimeInput.empty() ? true : newStartTime.setTime(startTimeInput);
+			if (startTimeInput.empty())
+				startTimeInput = originalStartTime.displayTime();
+			success = newStartTime.setTime(startTimeInput);
 			if (success)
 				continue;
-			cout << "Error: Inputted date is an invalid format, please try again.\n";
+			cout << "Error: Inputted date is invalid, please try again.\n";
 		} while (!success);
 
 		do {
 			cout << "Input end time (YYYY/MM/DD HH:MM) [" << originalEndTime.displayTime() << "]: ";
 			getline(cin, endTimeInput);
 			// Default input: remain no changes, else set the new time.
-			success = endTimeInput.empty() ? true : newEndTime.setTime(endTimeInput);
+			if (endTimeInput.empty())
+				endTimeInput = originalEndTime.displayTime();
+			success = newEndTime.setTime(endTimeInput) && (newEndTime.getTime() > newStartTime.getTime());
 			if (success)
 				continue;
-			cout << "Error: Inputted date is an invalid format, please try again.\n";
+			cout << "Error: Inputted date is invalid, please try again.\n";
 		} while (!success);
 
 		// Check time conflict before continuing
