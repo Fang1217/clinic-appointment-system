@@ -1,6 +1,11 @@
 #include "Appointment.hpp"
 using namespace std;
 
+string toupper(string input) {
+	for (auto& c : input) c = toupper(c);
+	return input;
+}
+
 void Appointment::search() {
 	vector<int> resultIndexArray;
 	search(resultIndexArray);
@@ -69,12 +74,14 @@ void Appointment::search(vector<int>& resultIndexArray) {
 				resultQueue.enqueue(i);
 			break;
 		case 1: // patient ID/name
-			if (appointmentEntry.patientID == searchTerm || appointmentEntry.patientName == searchTerm)
+			if (appointmentEntry.patientID == searchTerm || (toupper(appointmentEntry.patientName) == toupper(searchTerm))) {
 				resultQueue.enqueue(i);
+			}
 			break;
 		case 2: // doctor ID/name
-			if (to_string(appointmentEntry.doctorID) == searchTerm || appointmentEntry.doctorName == searchTerm)
+			if (to_string(appointmentEntry.doctorID) == searchTerm || (toupper(appointmentEntry.doctorName) == toupper(searchTerm))) {
 				resultQueue.enqueue(i);
+			}
 			break;
 		}
 		currentNodePointer = currentNodePointer->nextNode;
@@ -141,3 +148,5 @@ void Appointment::search(vector<int>& resultIndexArray) {
 				}
 
 };
+
+

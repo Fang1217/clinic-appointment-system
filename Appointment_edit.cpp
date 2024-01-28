@@ -53,38 +53,44 @@ void Appointment::edit() {
 		} while (!validPosition);
 	};
 	AppointmentNode* appointmentNodeToEdit = getAppointmentNode(indexToEdit);
-	AppointmentEntry appointmentEntry = appointmentNodeToEdit->appointmentEntry;
+	AppointmentEntry appointmentEntryToEdit = AppointmentEntry(appointmentNodeToEdit->appointmentEntry);
+	removeAppointmentNode(indexToEdit);
 
-	DateTime startTime = DateTime();
-	DateTime endTime = DateTime();
+	// original times
+	DateTime originalStartTime = DateTime(appointmentEntryToEdit.startTime);
+	DateTime originalEndTime = DateTime(appointmentEntryToEdit.endTime);
+	DateTime newStartTime = DateTime();
+	DateTime newEndTime = DateTime();
 	string startTimeInput;
 	string endTimeInput;
 
 	do {
 		do {
-			cout << "Input start time (YYYY/MM/DD HH:MM) [" << appointmentEntry.startTime.displayTime() << "]: ";
+			cout << "Input start time (YYYY/MM/DD HH:MM) [" << originalStartTime.displayTime() << "]: ";
 			getline(cin, startTimeInput);
 			// Default input: remain no changes, else set the new time.
-			success = startTimeInput.empty() ? startTime.setTime(appointmentEntry.startTime.displayTime()) : startTime.setTime(startTimeInput);
+			success = startTimeInput.empty() ? true : newStartTime.setTime(startTimeInput);
 			if (success)
 				continue;
 			cout << "Error: Inputted date is an invalid format, please try again.\n";
 		} while (!success);
 
 		do {
-			cout << "Input end time (YYYY/MM/DD HH:MM) [" << appointmentEntry.endTime.displayTime() << "]: ";
+			cout << "Input end time (YYYY/MM/DD HH:MM) [" << originalEndTime.displayTime() << "]: ";
 			getline(cin, endTimeInput);
 			// Default input: remain no changes, else set the new time.
-			success = endTimeInput.empty() ? endTime.setTime(appointmentEntry.endTime.displayTime()) : endTime.setTime(endTimeInput);
+			success = endTimeInput.empty() ? true : newEndTime.setTime(endTimeInput);
 			if (success)
 				continue;
 			cout << "Error: Inputted date is an invalid format, please try again.\n";
 		} while (!success);
 
 		// Check time conflict before continuing
-		noTimeConflict = checkConflict(startTime, endTime);
-		if (noTimeConflict)
+		noTimeConflict = checkConflict(newStartTime, newEndTime);
+		if (noTimeConflict) 
 			break;
+		appointmentEntryToEdit.startTime = originalStartTime;
+		appointmentEntryToEdit.endTime = originalEndTime;
 	} while (!noTimeConflict);
 
 	int doctorID;
@@ -95,12 +101,12 @@ void Appointment::edit() {
 
 	do {
 		string input;
-		cout << "Input new Doctor ID [" << appointmentEntry.doctorID << "]: ";
+		cout << "Input new Doctor ID [" << appointmentEntryToEdit.doctorID << "]: ";
 		getline(cin, input);
 		success = input.empty() || regex_match(input, regex("^[0-9]+$"));
 		if (success) {
 			if (input.empty())
-				doctorID = appointmentEntry.doctorID;
+				doctorID = appointmentEntryToEdit.doctorID;
 			else
 				doctorID = stoi(input);
 			continue;
@@ -109,40 +115,40 @@ void Appointment::edit() {
 	} while (!success);
 
 	do {
-		cout << "Input new Doctor Name [" << appointmentEntry.doctorName << "]: ";
+		cout << "Input new Doctor Name [" << appointmentEntryToEdit.doctorName << "]: ";
 		getline(cin, doctorName);
 		if (doctorName.empty())
-			doctorName = appointmentEntry.doctorName;
+			doctorName = appointmentEntryToEdit.doctorName;
 	} while (false); //OCD hits
 
 	do {
-		cout << "Input new Patient NRIC (without symbols) [" << appointmentEntry.patientID << "]: ";
+		cout << "Input new Patient NRIC (without symbols) [" << appointmentEntryToEdit.patientID << "]: ";
 		getline(cin, patientID); 
 		success = patientID.empty() || regex_match(patientID, regex("^[0-9]{12}$"));
 		if (success) {
 			if (patientID.empty())
-				patientID = appointmentEntry.patientID;
+				patientID = appointmentEntryToEdit.patientID;
 			continue;
 		}
 		cout << "Error: Invalid input, please try again.\n";
 	} while (!success);
 
 	do {
-		cout << "Input new Patient Name [" << appointmentEntry.patientName << "]: ";
+		cout << "Input new Patient Name [" << appointmentEntryToEdit.patientName << "]: ";
 		getline(cin, patientName);
 		if (patientName.empty())
-			patientName = appointmentEntry.patientName;
+			patientName = appointmentEntryToEdit.patientName;
 	} while (false);
 
 	do {
-		cout << "Input new Description [" << appointmentEntry.description << "]: ";
+		cout << "Input new Description [" << appointmentEntryToEdit.description << "]: ";
 		getline(cin, description);
 		if (description.empty())
-			description = appointmentEntry.description;
+			description = appointmentEntryToEdit.description;
 	} while (false);
 
-	appointmentNodeToEdit->appointmentEntry = AppointmentEntry(startTime, endTime, patientID, patientName, doctorID, doctorName, description);
-
+	appointmentEntryToEdit = AppointmentEntry(newStartTime, newEndTime, patientID, patientName, doctorID, doctorName, description);
+	addAppointmentMode(appointmentEntryToEdit);
 
 	save();
 

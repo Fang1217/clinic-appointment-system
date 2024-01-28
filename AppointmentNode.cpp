@@ -28,6 +28,7 @@ void Appointment::addAppointmentMode(AppointmentEntry appointmentEntry) {
 		}
 		currentNodePointer->nextNode = newAppointmentNode;
 	}
+	sortEntry(headNodePointer);
 	numberOfAppointments++;
 }
 

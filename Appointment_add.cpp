@@ -84,7 +84,7 @@ void Appointment::add() {
 	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, doctorID, doctorName, description);
 	addAppointmentMode(newAppointment);
 
-	sortEntry(headNodePointer);
+
 	save();
 
 	cout << "Appointment added successfully.\n"

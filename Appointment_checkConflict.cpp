@@ -11,7 +11,7 @@ bool Appointment::checkConflict(DateTime newStartTime, DateTime newEndTime) {
 			newStartTime.getTime() < appointmentEntry.endTime.getTime());
 
 		if (timeConflict) {
-			cout << "The following is conflicting with the specified time below, please try again.\n\n";
+			cout << "\nThe following is conflicting with the specified time below, please try again.\n\n";
 
 			cout << "Appointment Date & Time: "
 				<< appointmentEntry.startTime.displayDate("%Y/%m/%d %H:%M") << " - "
