@@ -5,28 +5,27 @@ void Appointment::add() {
 	string input;
 
 	DateTime startTime = DateTime();
-	do {
-		cout << "Input start time (YYYY/MM/DD HH:MM): ";
-		getline(cin, input);
-		success = startTime.setTime(input);
-		if (success)
-			continue;
-		cout << "Error: Inputted date is invalid, please try again.\n";
-	} while (!success);
-	
 	DateTime endTime = DateTime();
 	do {
-		cout << "Input end time (YYYY/MM/DD HH:MM): ";
-		getline(cin, input);
-		success = endTime.setTime(input) && endTime.getTime() > startTime.getTime();
-		if (success)
-			continue;
-		cout << "Error: Inputted date is invalid, please try again.\n";
-	} while (!success);
+		do {
+			cout << "Input start time (YYYY/MM/DD HH:MM): ";
+			getline(cin, input);
+			success = startTime.setTime(input);
+			if (success)
+				continue;
+			cout << "Error: Inputted date is invalid, please try again.\n";
+		} while (!success);
 
+		do {
+			cout << "Input end time (YYYY/MM/DD HH:MM): ";
+			getline(cin, input);
+			success = endTime.setTime(input) && endTime.getTime() > startTime.getTime();
+			if (success)
+				continue;
+			cout << "Error: Inputted date is invalid, please try again.\n";
+		} while (!success);
+	} while (!checkConflict(startTime, endTime));
 	// Check time conflict before continuing
-	if (!checkConflict(startTime, endTime))
-		add();
 
 	int doctorID;
 	string doctorName;
@@ -84,11 +83,9 @@ void Appointment::add() {
 	AppointmentEntry newAppointment = AppointmentEntry(startTime, endTime, patientID, patientName, doctorID, doctorName, description);
 	addAppointmentMode(newAppointment);
 
-
 	save();
 
 	cout << "Appointment added successfully.\n"
 		<< "Press any key to continue.";
 	cin.ignore();
-
 }

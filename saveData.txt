@@ -12,7 +12,7 @@
 2024/01/31 11:00,2024/01/31 13:00,031118100886,Wee Pei Pei,2,Estelle Khoo,Vaccination
 2024/01/31 13:00,2024/01/31 14:00,060302100884,Chloe Sim Zhao Min,2,Estelle Khoo,Vaccination
 2024/02/01 11:00,2024/02/01 12:00,891003041054,Wee Kim Yong,4,Wee Yit Yin,X-ray
-2024/02/01 12:00,2024/02/01 14:00,770410040885,John Wick,4,Wee Yit Yin,X-ray
+2024/02/01 19:00,2024/02/01 20:00,880506080996,Wee Pei Pei,4,Wee Yit Yin,Trial
 2024/02/10 11:00,2024/02/10 13:00,991008100884,Muhammad bin Ali,3,Lim Fang Wei,Body Screening
 2024/02/10 13:00,2024/02/10 15:00,981008080994,Alia binti Abdullah,3,Lim Fang Wei,Vaccination
 2024/02/18 10:00,2024/02/18 12:00,880308080887,Ain binti Khairol,5,Ali bin Hafiz,Body screening
